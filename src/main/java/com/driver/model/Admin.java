@@ -22,6 +22,10 @@ public class Admin {
     public Admin() {
     }
 
+    public Admin(List<ServiceProvider> serviceProviderList) {
+        this.serviceProviderList = serviceProviderList;
+    }
+
     public Admin(int id, String userName, String password) {
         this.id = id;
         this.userName = userName;
