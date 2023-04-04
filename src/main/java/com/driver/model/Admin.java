@@ -1,34 +1,27 @@
 package com.driver.model;
 
-
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "admin")
+@Entity
 public class Admin {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    private String userName;
-
+    private String username;
     private String password;
 
-    @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
-    List<ServiceProvider> serviceProviderList=new ArrayList<>();
+    //parent of service provider
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
+    List<ServiceProvider> serviceProviders = new ArrayList<>();
 
     public Admin() {
     }
 
-    public Admin(List<ServiceProvider> serviceProviderList) {
-        this.serviceProviderList = serviceProviderList;
-    }
-
-    public Admin(int id, String userName, String password) {
-        this.id = id;
-        this.userName = userName;
+    public Admin(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
@@ -40,12 +33,12 @@ public class Admin {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -56,11 +49,11 @@ public class Admin {
         this.password = password;
     }
 
-    public List<ServiceProvider> getServiceProviderList() {
-        return serviceProviderList;
+    public List<ServiceProvider> getServiceProviders() {
+        return serviceProviders;
     }
 
-    public void setServiceProviderList(List<ServiceProvider> serviceProviderList) {
-        this.serviceProviderList = serviceProviderList;
+    public void setServiceProviders(List<ServiceProvider> serviceProviders) {
+        this.serviceProviders = serviceProviders;
     }
 }
