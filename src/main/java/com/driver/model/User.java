@@ -32,18 +32,6 @@ public class User {
     public User() {
     }
 
-    public User(int id, String username, String password, String originalIp, String maskedIp, Boolean connected, List<ServiceProvider> serviceProviderList, List<Connection> connectionList, Country originalCountry) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.originalIp = originalIp;
-        this.maskedIp = maskedIp;
-        this.connected = connected;
-        this.serviceProviderList = serviceProviderList;
-        this.connectionList = connectionList;
-        this.originalCountry = originalCountry;
-    }
-
     public int getId() {
         return id;
     }

@@ -1,8 +1,9 @@
+// Note: Do not write @Enumerated annotation above CountryName in this model.
 package com.driver.model;
 
 import javax.persistence.*;
 
-@Entity(name = "country")
+@Entity
 public class Country {
 
     @Id
@@ -11,6 +12,7 @@ public class Country {
     private CountryName countryName;
     private String code;
 
+    //child of user
     @OneToOne
     @JoinColumn
     User user;
@@ -22,15 +24,8 @@ public class Country {
     public Country() {
     }
 
-    public Country(User user, ServiceProvider serviceProvider) {
-        this.user = user;
-        this.serviceProvider = serviceProvider;
-    }
-
-    public Country(int id, CountryName countryName, String code) {
-        this.id = id;
+    public Country(CountryName countryName) {
         this.countryName = countryName;
-        this.code = code;
     }
 
     public int getId() {
@@ -39,22 +34,6 @@ public class Country {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public ServiceProvider getServiceProvider() {
-        return serviceProvider;
-    }
-
-    public void setServiceProvider(ServiceProvider serviceProvider) {
-        this.serviceProvider = serviceProvider;
     }
 
     public CountryName getCountryName() {
@@ -71,5 +50,21 @@ public class Country {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public ServiceProvider getServiceProvider() {
+        return serviceProvider;
+    }
+
+    public void setServiceProvider(ServiceProvider serviceProvider) {
+        this.serviceProvider = serviceProvider;
     }
 }
