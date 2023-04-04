@@ -11,9 +11,6 @@ import com.driver.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 public class AdminServiceImpl implements AdminService {
     @Autowired
@@ -27,7 +24,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin register(String username, String password) {
-        Admin admin=new Admin();
+
+        Admin admin = new Admin();
         admin.setUsername(username);
         admin.setPassword(password);
         adminRepository1.save(admin);
@@ -36,26 +34,30 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin addServiceProvider(int adminId, String providerName) {
-       Admin admin=adminRepository1.findById(adminId).get();
-       ServiceProvider serviceProvider=new ServiceProvider();
-       serviceProvider.setName(providerName);
-       serviceProvider.setAdmin(admin);
-       admin.getServiceProviders().add(serviceProvider);
-       adminRepository1.save(admin);
-       return admin;
 
+        Admin admin = adminRepository1.findById(adminId).get();
+        ServiceProvider serviceProvider = new ServiceProvider();
+        serviceProvider.setName(providerName);
+        serviceProvider.setAdmin(admin);
+        admin.getServiceProviders().add(serviceProvider);
+        adminRepository1.save(admin);
+        return admin;
     }
 
     @Override
-    public ServiceProvider addCountry(int serviceProviderId, String countryName) throws Exception {
+    public ServiceProvider addCountry(int serviceProviderId, String countryName) throws Exception{
+
         //checking if country name is valid
-        if(countryName.equalsIgnoreCase("ind")||
-                countryName.equalsIgnoreCase("aus")
-                ||countryName.equalsIgnoreCase("usa")||
-                countryName.equalsIgnoreCase("chi")||
-                countryName.equalsIgnoreCase("jpn")){
+        if (countryName.equalsIgnoreCase("ind") ||
+                countryName.equalsIgnoreCase("usa") ||
+                countryName.equalsIgnoreCase("aus") ||
+                countryName.equalsIgnoreCase("chi") ||
+                countryName.equalsIgnoreCase("jpn")
+        ){
+
+            Country country = new Country();
             ServiceProvider serviceProvider=serviceProviderRepository1.findById(serviceProviderId).get();
-            Country country=new Country();
+
             if(countryName.equalsIgnoreCase("ind")){
                 country.setCountryName(CountryName.IND);
                 country.setCode(CountryName.IND.toCode());
@@ -83,12 +85,12 @@ public class AdminServiceImpl implements AdminService {
             country.setServiceProvider(serviceProvider);
             //adding country in country list of parent service provider
             serviceProvider.getCountryList().add(country);
-            //saving parent entity service provider which will save country due to bidirectional mapping
+            //saving parent entity service provider which will save country due to bi directional mapping
             serviceProviderRepository1.save(serviceProvider);
 
             return serviceProvider;
-
         }
+
         else{
             throw new Exception("Country not found");
         }
