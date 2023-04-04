@@ -6,13 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 @RestController
 @RequestMapping("/connection")
 public class ConnectionController {
     @Autowired
     ConnectionServiceImpl connectionService;
-
     @PostMapping("/connect")
     public ResponseEntity<Void> connect(@RequestParam int userId, @RequestParam String countryName) throws Exception{
         //Connect the user to a vpn by considering the following priority order.
@@ -32,7 +30,6 @@ public class ConnectionController {
         User user = connectionService.disconnect(userId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
     @GetMapping("/communicate")
     public ResponseEntity<Void> communicate(@RequestParam int senderId, @RequestParam int receiverId) throws Exception{
         //Establish a connection between sender and receiver users
